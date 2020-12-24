@@ -175,6 +175,14 @@ if (matchDomain('elmercurio.com')) {
   removeDOMElement(paywall);
 } else if (matchDomain('bloomberg.com')) {
   blockElement('#graphics-paywall-overlay', true);
+
+  // remove fence and newsletter modal, ensure scrolling on body
+  blockElement('#newsletter-modal', true);
+  blockElement('.fence-rendered', true);
+  document.body.style.overflowY = 'auto';
+
+  // prevent hiding bottom half of article when fence renders
+  document.querySelectorAll('.fence-body p').forEach(function(p) { p.style.display = 'block'; });
 } else if (matchDomain('bloombergquint.com')) {
   const articlesLeftModal = document.getElementsByClassName('paywall-meter-module__story-paywall-container__1UgCE')[0];
   const paywall = document.getElementById('paywallDmp');
